@@ -241,6 +241,7 @@ def dataset_selector(dataset_addr, type):
         raise NotImplementedError
 # dataset 경로를 정리하는 함수
 # 복잡한 데이터셋 구조로부터 json 파일과 image 파일 리스트를 정리해서 새로운 데이터셋을 정리하는데 사용
+# 21.11.09 현재 개발 중
 
 
 def dataset_maker(data_type, file_type, input_path):
