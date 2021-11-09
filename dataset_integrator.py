@@ -8,5 +8,5 @@ from dataset_preprocess.myval import *
 #Prototype Integration function
 #coco_json_integrator(data_type, file_type, input_path)
 
-#Main function
+#Main Fucntion for Dataset Integration
 dataset_maker(data_type, file_type, input_path)
