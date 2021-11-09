@@ -1,3 +1,3 @@
-# EVCINet
-Electric Vehicle Charge Inlet detection Network
+# EVCIDNet
+Electric Vehicle Charge Inlet Detection Network
 
