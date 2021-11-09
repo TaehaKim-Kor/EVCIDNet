@@ -2,9 +2,13 @@ import json
 from glob import glob
 import shutil
 import os
-from dataset import coco_json_integrator
+from dataset import dataset_maker
 
 data_type = "train"
 file_type = ".json"
 input_path = "C:\\Users\\User\\Desktop\\annotation_test\\"
-coco_json_integrator(data_type,file_type,input_path)
+output_path = "E:\\annotation_integrated\\"
+#data_type = "instances_default"
+#file_type=".json"
+#input_path="E:/EVlegacy/"
+dataset_maker(data_type, file_type, input_path)
