@@ -2,7 +2,7 @@ import json
 from glob import glob
 import shutil
 import os
-from dataset import dataset_maker
+from dataset_preprocess/dataset import dataset_maker
 
 data_type = "train"
 file_type = ".json"
