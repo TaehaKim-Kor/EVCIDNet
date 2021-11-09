@@ -27,8 +27,6 @@ def annotated_image_id_caller(json_data):
     id_list = []
     for i in range(length):
         id_list.append(json_data["annotations"][i]["image_id"])
-        #print(i, json_data["annotations"][i]["image_id"])
-    #print(str(set(id_list))[1:-1].split(", "))
     return str(set(id_list))[1:-1].split(", ")
 # Annotation이 존재하는 이미지만 포함된 리스트를 반환하는 함수
 
