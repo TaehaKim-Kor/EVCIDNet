@@ -107,7 +107,6 @@ def json_cleaner(json_data, temp_add):
     json.dump(json_dict,clean_json,indent="\t")
 # json 파일을 입력받아 annotation 정보가 없는 image 정보를 제거하여 임시파일에 저장한 함수
 # 기존엔 annotation 검사를 한번만 했으나 두 번 진행하는 것으로 수정(211108 추가)
-# extend는 한번에 하는 것으로 수정(211108 추가)
 
 def json_integrator(json_output_addr, json_adder_addr, json_temp_addr):
     try:
@@ -128,6 +127,7 @@ def json_integrator(json_output_addr, json_adder_addr, json_temp_addr):
         print(json_output_addr+" is not existed json file.")
         shutil.copyfile(json_adder_addr, json_output_addr)
 # 생성된 임시 json 파일을 입력받아 annotation/image정보를 합친 json파일을 반환하는 함수
+# extend는 한번에 하는 것으로 수정(211108 추가)
 
 def integration_validation_checker(json_list, output_addr):
     image_id_count = []
