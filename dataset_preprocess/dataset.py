@@ -93,10 +93,6 @@ def json_cleaner(json_data, temp_add):
     for id in annotated_id_list:
         anno_info = annotation_caller(json_data, id)
         if anno_info is not False:
-            #print("==============================")
-            #print(id_count)
-            #print(anno_count)
-            #print(anno_info)
             for i in range(len(anno_info)):
                 if len(anno_info[i]["segmentation"]) == 0:
                     anno_info[i]["segmentation"] = segmentation_return_from_annolist(anno_info[i])
@@ -109,22 +105,17 @@ def json_cleaner(json_data, temp_add):
             image_info_list.append(image_info)
             for i in range(len(anno_info)):
                 anno_info_list.append(anno_info[i])
-            #print(anno_info)
-            #print("==============================")
     json_dict.update({"images":image_info_list,"annotations":anno_info_list})
     json.dump(json_dict,clean_json,indent="\t")
 # json 파일을 입력받아 annotation 정보가 없는 image 정보를 제거하여 임시파일에 저장한 함수
 # 기존엔 annotation 검사를 한번만 했으나 두 번 진행하는 것으로 수정(211108 추가)
 # extend는 한번에 하는 것으로 수정(211108 추가)
+
 def json_integrator(json_output_addr, json_adder_addr, json_temp_addr):
     try:
         shutil.copyfile(json_output_addr,json_temp_addr)
         json_output = json_caller(json_temp_addr)
         json_adder = json_caller(json_adder_addr)
-        #print("=====================================")
-        #print(len(json_output["images"]))
-        #print(len(json_output["annotations"]))
-        #print("=====================================")
         for k in range(len(json_adder["images"])):
             json_adder["images"][k]['id'] += len(json_output['images'])
         for k in range(len(json_adder["annotations"])):
@@ -132,10 +123,6 @@ def json_integrator(json_output_addr, json_adder_addr, json_temp_addr):
             json_adder["annotations"][k]["image_id"] += len(json_output['images'])
         json_output["images"].extend(json_adder["images"])
         json_output["annotations"].extend(json_adder["annotations"])
-        #print("=====================================")
-        #print(len(json_output["images"]))
-        #print(len(json_output["annotations"]))
-        #print("=====================================")
         output = open(json_output_addr, 'w', encoding='utf-8')
         json.dump(json_output, output, indent="\t")
         output.close()
