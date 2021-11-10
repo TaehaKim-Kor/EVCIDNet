@@ -193,7 +193,7 @@ def coco_json_integrator(data_type, file_type, input_path):
         except:
             pass
 # json 파일을 입력받아 결합하는 프로토타입 함수
-# dataset_integrator.py 에서 주어진 입력 값에 직접 호출하면 바로 합쳐줌. 적용가능성 확인.
+# dataset_integrator_main.py 에서 주어진 입력 값에 직접 호출하면 바로 합쳐줌. 적용가능성 확인.
 
 def json_integrate_main(output_add, json_list, temp_add):
     json_list = json_file_validation_checker(json_list, temp_add, output_add)
