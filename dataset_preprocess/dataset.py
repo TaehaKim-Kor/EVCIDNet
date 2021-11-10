@@ -42,11 +42,12 @@ def segmentation_return_from_annolist(anno_data):
     ymin = anno_data["bbox"][1]
     xmax = xmin+anno_data["bbox"][2]
     ymax = ymin+anno_data["bbox"][3]
-    segmentation = [[xmin,ymin,xmax,ymin,xmin,ymax,xmax,ymax]]
+    #segmentation = [[xmin,ymin,xmax,ymin,xmin,ymax,xmax,ymax]]
+    segmentation = [[xmin, ymin, xmax, ymin, xmax, ymax, xmin, ymax]]
     return segmentation
 # Segmentation이 공란인 데이터를 계산하여 채워주는 함수
 # Segmentation은 리스트의 리스트 형태로 저장되는 것을 확인하여 수정(21.11.10 추가)
-
+# Segmentation 순서 수정(21.11.10)
 def json_file_validation_checker(json_add_list, temp_add, output_add):
     try:
         json_add_list.remove(output_add)
@@ -162,7 +163,7 @@ def integration_validation_checker(json_list, output_addr):
         for i in unsafe_id:
             print(i)
     for j in range(len(output_data["annotations"])):
-        if len(output_data["annotations"][j]["segmentation"]) != 8 or len(output_data["annotations"][j]["bbox"]) != 4:
+        if len(output_data["annotations"][j]["segmentation"][0]) != 8 or len(output_data["annotations"][j]["bbox"]) != 4:
             trigger = False
             print("Annotation Error : "+str(output_data["annotations"][j]["image_id"]))
     if trigger: print("Integration dataset code successfully works.")
@@ -172,6 +173,7 @@ def integration_validation_checker(json_list, output_addr):
 # 2. 임시 파일들의 annotation 정보의 갯수의 합이 출력 파일의 annotation 정보의 갯수와 같은지?
 # 3. 임시 파일들의 image 정보 중 annotation 정보가 없는 것이 있는지?
 # 4. 출력 파일에서 segmentation/bbox 정보가 잘못된 것이 있는지? => 길이 여부로 판별(8개, 4개가 존재해야함.)
+# 4-1. Segmentation 형태 변경으로 인한 코드 수정(21.11.10)
 
 def coco_json_integrator(data_type, file_type, input_path):
     output_add, json_list, temp_add = io_address_caller(data_type, file_type, input_path)
@@ -193,7 +195,7 @@ def coco_json_integrator(data_type, file_type, input_path):
         except:
             pass
 # json 파일을 입력받아 결합하는 프로토타입 함수
-# dataset_integrator_main.py 에서 주어진 입력 값에 직접 호출하면 바로 합쳐줌. 적용가능성 확인.
+# dataset_integrator.py 에서 주어진 입력 값에 직접 호출하면 바로 합쳐줌. 적용가능성 확인.
 
 def json_integrate_main(output_add, json_list, temp_add):
     json_list = json_file_validation_checker(json_list, temp_add, output_add)
@@ -258,7 +260,6 @@ def image_mover(output_folder, image_list, output_path):
 # 최종으로 만들어진 json 파일로부터 annotation이 된 이미지 파일만을 받아 출력 폴더로 옮기는 함수
 
 def dataset_maker(input_path, output_folder, researcher, data_type, file_type):
-    dataset_selector(input_path, researcher)
     output_path = output_folder + data_type + file_type
     if not os.path.isdir(output_folder):
         os.mkdir(output_folder)
@@ -267,7 +268,21 @@ def dataset_maker(input_path, output_folder, researcher, data_type, file_type):
     temp_path.append(output_folder + "temp" + file_type)
     json_integrate_main(output_path, json_path, temp_path)
     image_mover(output_folder, image_path, output_path)
-# 최종적으로 데이터셋을 만드는 함수
+# 데이터셋을 통합하는 함수(프로토타입)
 # 1. 출력 폴더가 명시되어 있어야 함.(존재 유무는 상관x)
-# 2. 데이터가 넉넉해야함.(출력폴더에 이미지를 옮겨씀)
+# 2. 데이터 여유 공간이 충분해야함.(출력폴더에 이미지를 옮겨씀)
 # 3. researcher는 데이터셋 만든 사람을 지칭하는 것으로 폴더 타입이 달라 임의로 구분
+
+def dataset_integrator(image_path, json_path, output_folder)
+    output_path = output_folder + data_type + file_type
+    if not os.path.isdir(output_folder):
+        os.mkdir(output_folder)
+    temp_path = [output_folder + "temp" + str(i) + file_type for i in range(1, len(json_path) + 1)]
+    temp_path.append(output_folder + "temp" + file_type)
+    json_integrate_main(output_path, json_path, temp_path)
+    image_mover(output_folder, image_path, output_path)
+# 최종적으로 데이터셋을 통합하는 함수
+# 1. 출력 폴더가 명시되어 있어야 함.(존재 유무는 상관x)
+# 2. 데이터 여유 공간이 충분해야함.(출력폴더에 이미지를 옮겨씀)
+# 3. 입출력 자유도를 위해 Image/Annotation/Output 만 명시하면 됨.
+# 4. 입력으로 받는 image_path , json_path는 통합하고자 하는 모든 정보가 포함되어 있어야 함.
