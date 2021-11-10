@@ -1,6 +1,6 @@
 import cv2
 import json
-from dataset_preprocess.dataset import json_caller
+from dataset_preprocess.dataset_func import json_caller
 from glob import glob
 import os
 import numpy as np
