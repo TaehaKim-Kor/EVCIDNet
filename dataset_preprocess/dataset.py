@@ -274,7 +274,7 @@ def dataset_maker(input_path, output_folder, researcher, data_type, file_type):
 # 3. researcher는 데이터셋 만든 사람을 지칭하는 것으로 폴더 타입이 달라 임의로 구분
 
 def dataset_integrator(image_path, json_path, output_folder)
-    output_path = output_folder + data_type + file_type
+    output_path = output_folder + "Integrated_annotation.json"
     if not os.path.isdir(output_folder):
         os.mkdir(output_folder)
     temp_path = [output_folder + "temp" + str(i) + file_type for i in range(1, len(json_path) + 1)]
