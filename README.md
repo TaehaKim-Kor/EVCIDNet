@@ -32,10 +32,10 @@ Demonstration System Specification
 >
 >OpenCV(Python) - 4.5.3
 >
->Pytorch - 1.8.0+cu101
->>Torchvision - 0.9.0+cu101
+>Pytorch - 1.8.1+cu101
+>>Torchvision - 0.9.1+cu101
 >>
->>Torchaudio - 0.8.0
+>>Torchaudio - 0.8.1
 
 
 Released System Specification(To be announced)
