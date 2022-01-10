@@ -61,9 +61,11 @@ Tips for Reproducing
 >
 >2. If you use Windows 10, you should check Visual Studio's version carefully while installing MMCV and MMdet.
 >
->When I installed MMCV in my virtual environment, sometimes installing was failed because I use Visual Studio 2022.
+>When I tried to install MMCV in my virtual environment, installing MMCV failed that was because I used Visual Studio 2022.
 >
->You should use Visual Studio 2015 or 2019.
+>You should use Visual Studio 2015 or [2019](https://docs.microsoft.com/en-us/visualstudio/releases/2019/release-notes).
+>
+>Our system was working in the Visual Studio 2019.
 >
 >If you get the error message
 >
@@ -74,3 +76,5 @@ Tips for Reproducing
 >3. OpenCV should be installed in the Visual Studio and Python too.
 >
 >For the correct working on the system, you should modify all of path related OpenCV in the visual studio.
+>
+>If you modify all of the path, then please release the visual studio again.
