@@ -14,3 +14,40 @@ Reference
 >[Azure Kinect DK](https://docs.microsoft.com/en-us/azure/kinect-dk/) English
 >
 > [DetectoRS](https://github.com/joe-siyuan-qiao/DetectoRS)
+
+Demonstration System Specification
+>CPU - Intel Core i7 8700
+>
+>RAM - 16GB
+>
+>GPU - NVIDIA Geforce RTX 2080Ti
+>
+>mmdet - 2.17.0
+>
+>mmcv - 1.3.8
+>
+>CUDA - 10.1
+>
+>Pytorch - 1.8.0+cu101
+>>Torchvision - 0.9.0+cu101
+>>
+>>Torchaudio - 0.8.0
+
+
+Released System Specification(To be announced)
+>CPU - Intel Core i7 11700
+>
+>RAM - 16GB
+>
+>GPU - NVIDIA Geforce GTX 1080Ti
+>
+>mmdet - 
+>
+>mmcv -
+>
+>CUDA - 10.1
+>
+>Pytorch - 1.8.0+cu101
+>>Torchvision - 0.9.0+cu101
+>>
+>>Torchaudio - 0.8.0
