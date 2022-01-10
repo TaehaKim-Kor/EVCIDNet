@@ -28,6 +28,10 @@ Demonstration System Specification
 >
 >CUDA - 10.1
 >
+>OpenCV(Visual Studio) - 4.3.0
+>
+>OpenCV(Python) - 4.5.3
+>
 >Pytorch - 1.8.0+cu101
 >>Torchvision - 0.9.0+cu101
 >>
@@ -41,11 +45,15 @@ Released System Specification(To be announced)
 >
 >GPU - NVIDIA Geforce GTX 1080Ti
 >
->mmdet - 
+>mmdet - 2.6.0
 >
->mmcv -
+>mmcv - 1.3.9
 >
 >CUDA - 10.1
+>
+>OpenCV(Visual Studio) - 4.5.0
+>
+>OpenCV(Python) - 4.5.3
 >
 >Pytorch - 1.8.0+cu101
 >>Torchvision - 0.9.0+cu101
@@ -78,3 +86,7 @@ Tips for Reproducing
 >For the correct working on the system, you should modify all of path related OpenCV in the visual studio.
 >
 >If you modify all of the path, then please release the visual studio again.
+>
+>No matter what version you use, it will works I think.
+>
+>I used OpenCV 4.3.0 for the Demostration system, and 4.5.0 for the Released system.
