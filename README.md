@@ -51,3 +51,12 @@ Released System Specification(To be announced)
 >>Torchvision - 0.9.0+cu101
 >>
 >>Torchaudio - 0.8.0
+
+Tips for Reproducing
+>1. Be careful while installing the entire libraries you need.
+>That is because there is a complicate requirements between Pytorch, MMdet, and MMCV.
+>And if you want to use another nerual network models in MMCV directly, you should check that model's MMCV, MMdet version too.
+>
+>2. If you use Windows 10, you should check Visual Studio's version carefully while installing MMCV and MMdet.
+>When I installed MMCV in my virtual environment, sometimes installing was failed because I use Visual Studio 2022.
+>You should use Visual Studio 2015 or 2019.
