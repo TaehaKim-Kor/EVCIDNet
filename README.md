@@ -9,6 +9,8 @@ If you want to use this project, you should add or install these libraries.
 Reference
 > [MMdetection](https://github.com/open-mmlab/mmdetection)
 >
-> [Azure Kinect DK](https://docs.microsoft.com/ko-kr/azure/kinect-dk/)
-> 
+> [Azure Kinect DK](https://docs.microsoft.com/ko-kr/azure/kinect-dk/) 한국어
+>
+>[Azure Kinect DK](https://docs.microsoft.com/en-us/azure/kinect-dk/) English
+>
 > [DetectoRS](https://github.com/joe-siyuan-qiao/DetectoRS)
