@@ -2,6 +2,7 @@ import ctypes
 import os
 import subprocess
 import time
+import torch # pytorch memory management
 from infer_tools.func import *
 from infer_tools.val import *
 from glob import glob
@@ -98,11 +99,12 @@ def vision_process_with_communication(model, client):
                 while(not os.path.isfile(point_addr)):
                     time.sleep(0.1)
                 try: pc_list=center_coordinate_calculator(point_addr, class_detection_list)
-                except: pc_list = [[0 for i in range(3)] for i in range(3)]
+                except: pc_list = Error_coordinate
                 # 여기까지하면 3차원좌표가 나옴.
                 if transmit_coordinates(pc_list, client):
                     flag_remover(flag[0]) #이미지 캡처 시작 플래그 초기화
                     flag_remover(flag[1]) #이미지 캡처 완료 플래그 초기화
+                    torch.cuda.empty_cache() #Memory deallocation
                     try: os.remove(color_addr)
                     except: pass
                     try: os.remove(point_addr)

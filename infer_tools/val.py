@@ -15,7 +15,7 @@ json_dict = {"licenses": [{"name": "", "id": 0, "url": ""}],
                             {"id": 2, "name": "HolePairRight", "supercategory": ""},
                             {"id": 3, "name": "ACHole", "supercategory": ""}],
              "images": [], "annotations": []}
-
+Error_coordinate = [[77777 for i in range(3)] for i in range(3)]
 #Communication Part variables
 regiaddrX1 = 8
 regiaddrY1 = 9
