@@ -72,7 +72,7 @@ def communicate_flag_activator(client, flag):
 def vision_process_with_communication(model, client):
     #while (communicate_flag_activator(client, regiaddr, flag)):
     while(True):
-        a=3
+        a=2
         while(True):
             a = communicate_flag_activator(client, flag)
             if a == 2: time.sleep(0.1)
