@@ -1,8 +1,11 @@
 ## EVCIDNet
 # Electric Vehicle Charge Inlet Detection Network
 Model : DetectoRS with MMdetection
+
 Camera : Azure Kinect DK
+
 Language : C++(Kinect) , Python(DetectoRS)
+
 Communication : Pymodbus(TCP/IP Modbus)
 
 If you want to use this project, you should add or install these libraries.
