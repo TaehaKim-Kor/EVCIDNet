@@ -1,8 +1,11 @@
 ## EVCIDNet
 # Electric Vehicle Charge Inlet Detection Network
-Model : DetectoRS with MMdetection
+Model : DetectoRS with MMDetection
+
 Camera : Azure Kinect DK
+
 Language : C++(Kinect) , Python(DetectoRS)
+
 Communication : Pymodbus(TCP/IP Modbus)
 
 If you want to use this project, you should add or install these libraries.
@@ -15,7 +18,7 @@ If you want to use this project, you should add or install these libraries.
 # Main Libraries
 > Pytorch
 > 
-> MMdetection
+> MMDetection
 > 
 > DetectoRS
 > 
@@ -75,9 +78,9 @@ If you want to use this project, you should add or install these libraries.
 >
 > That is because there is a complicate requirements between Pytorch, MMdet, and MMCV.
 >
-> And if you want to use another nerual network models in MMCV directly, you should check that model's MMCV, MMdet version too.
+> And if you want to use another nerual network models in MMCV directly, you should check that model's MMCV, MMDetection version too.
 >
-> 2. If you use Windows 10, you should check Visual Studio's version carefully while installing MMCV and MMdet.
+> 2. If you use Windows 10, you should check Visual Studio's version carefully while installing MMCV and MMDetection.
 >
 > When I tried to install MMCV in my virtual environment, installing MMCV failed that was because I used Visual Studio 2022.
 >
@@ -102,7 +105,7 @@ If you want to use this project, you should add or install these libraries.
 > I used OpenCV 4.3.0 for the Demostration system, and 4.5.0 for the Released system.
 > 
 > 4. When you run the code, please follow this type.
->> python infer.py {Path for RGB image from Kinect} {Path for MMdetection configuration file} {Path for Pytorch Parameter Model File}
+>> python infer.py {Path for RGB image from Kinect} {Path for MMDetection configuration file} {Path for Pytorch Parameter Model File}
 
 
 # Command for running system
@@ -123,7 +126,7 @@ If you want to use this project, you should add or install these libraries.
 >> 
 >> Main contribution : Dataset Creation, Dataset Augmentation, Neural Network Training and Test
 >
-> Jinyoung Lee
+> Jinyeong Lee
 >> Seoul National University of Science and Technology
 >> 
 >> Department of Electrical and Information Engineering
@@ -131,7 +134,7 @@ If you want to use this project, you should add or install these libraries.
 >> Main contribution : Dataset Creation, System Maintenance
 
 # Reference
-> [MMdetection](https://github.com/open-mmlab/mmdetection)
+> [MMDetection](https://github.com/open-mmlab/mmdetection)
 >
 > [Azure Kinect DK](https://docs.microsoft.com/en-us/azure/kinect-dk/)
 >
