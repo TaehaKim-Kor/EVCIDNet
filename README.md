@@ -38,7 +38,7 @@ Demonstration System Specification
 >>Torchaudio - 0.8.0
 
 
-Released System Specification(To be announced)
+Released System Specification
 >CPU - Intel Core i7 11700
 >
 >RAM - 16GB
