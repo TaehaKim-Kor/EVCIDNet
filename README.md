@@ -123,7 +123,7 @@ If you want to use this project, you should add or install these libraries.
 >> 
 >> Main contribution : Dataset Creation, Dataset Augmentation, Neural Network Training and Test
 >
-> Jinyoung Lee
+> Jinyeong Lee
 >> Seoul National University of Science and Technology
 >> 
 >> Department of Electrical and Information Engineering
