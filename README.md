@@ -126,7 +126,7 @@ If you want to use this project, you should add or install these libraries.
 >> 
 >> Department of Electronic and IT Media Engineering
 >> 
->> Main contribution : Dataset Creation, Dataset Augmentation, Neural Network Training and Test
+>> Main contribution : Camera Application, Dataset Creation, Dataset Augmentation, Neural Network Training and Test
 >
 > Jinyeong Lee
 >> Seoul National University of Science and Technology
