@@ -11,6 +11,8 @@ Communication : Pymodbus(TCP/IP Modbus)
 If you want to use this project, you should add or install these libraries.
 > OpenCV, At least 4.3.0, opencv_world4{xx}d.dll, opencv_world4{xx}d.dll should be in the ./x64/Release/
 >> If you install OpenCV 4.5.0 in your Windows, it will work.
+>>
+>> If you install OpenCV's another version, you should release Visual Studio Project again with matching your OpenCV path.
 >
 > Pytorch Parameter Model File. [Download Link, to be announced](tobeannoucned.com)
 >> Default file name : best_model.pth
