@@ -18,7 +18,7 @@ If you want to use this project, you should add or install these libraries.
 >> 
 >> We do not guarentee this system works with OpenCV's previous version.
 >
-> Pytorch Parameter Model File. [Download Link](https://docs.google.com/uc?export=download&id=1xOLM4i5fJwMhgvZX6uoJ2rGcsnC9vM4C)
+> Pytorch Parameter Model File. [Download Link](https://drive.google.com/file/d/1xOLM4i5fJwMhgvZX6uoJ2rGcsnC9vM4C/view?usp=sharing)
 >> Default file name : EVCIDNet_DetectoRS_model.pth
 
 # Main Libraries
