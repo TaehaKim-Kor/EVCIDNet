@@ -15,49 +15,50 @@ def flag_activator (flag_add):
         return False
 def flag_remover(flag_add):
     if os.path.isfile(flag_add):
-        os.remove(flag_add)
-
+        os.remove(flag_add)      
+                                    # activate and remove flag function
 def json_fake_maker(output_addr):
     clean_json = open(output_addr, 'w', encoding='utf-8')
     image_info_list = [{"lincense" : 0, "date_captured" : 0, "width" : 2048, "flicker_url" : "", "file_name" : "color.png", "coco_url" : "", "height" : 1536, "id" : 1}]
     anno_info_list = [{"area" : 1, "iscrowd" : 0, "image_id" : 1, "category_id" : 1, "bbox" : [1,1,1,1], "id" : 1, "segmentation" : [[1,1,2,1,2,2,1,2]]}]
-    json_dict.update({"images":image_info_list,"annotations":anno_info_list})
-    json.dump(json_dict,clean_json,indent="\t")
+    json_dict.update({"images":image_info_list,"annotations":anno_info_list})           # 가상의 json파일 
+    json.dump(json_dict,clean_json,indent="\t")         
 
 def pixel_calculator(result_addr):
     f=open(result_addr, 'r')
-    txt=f.readlines()
+    txt=f.readlines()       
     if len(txt) is not 3:
         print("The number of object is not 3")
     tgt = [[] for i in range(3)]
     for i in range(3):
-        tot = list(txt[i][1:-2].split(" "))
+        tot = list(txt[i][1:-2].split(" "))  
         for j in range(len(tot)):
             if tot[j] != "":
-                tgt[i].append(float(tot[j]))
+                tgt[i].append(float(tot[j]))        # get not blank factors
     return tgt
+
 def nonzero_mean(nparray):
-    nonzero_list = np.transpose(np.nonzero(nparray))
+    nonzero_list = np.transpose(np.nonzero(nparray)) 
     arrsum = 0
     arrnum = len(nonzero_list)
     for nz in nonzero_list:
-        arrsum += mytypecast(nparray[nz[0],nz[1]])
+        arrsum += mytypecast(nparray[nz[0],nz[1]])  # change argument's datatype
     return int(arrsum/arrnum)
 
 def mytypecast(value):
     a = np.array(value, dtype=np.uint16)
-    return int(a.view(np.int16))
+    return int(a.view(np.int16))            # transform datetype int16
 
 def mean_coordinate_calculator(pc_addr, target):
     pc = np.array(cv2.imread(pc_addr, cv2.IMREAD_UNCHANGED), dtype=np.int16)
     coordinate_list = []
     for tgt in target:
         alpha = np.zeros(np.shape(pc))
-        xmin = int(tgt[0])
+        xmin = int(tgt[0])              # bbox location
         ymin = int(tgt[1])
         xmax = int(tgt[2])
         ymax = int(tgt[3])
-        alpha[ymin:ymax, xmin:xmax, :] = 1
+        alpha[ymin:ymax, xmin:xmax, :] = 1    # masking
         temp = pc[:, :, 0] * alpha[:, :, 0]
         zmean = nonzero_mean(temp)
         temp = pc[:, :, 1] * alpha[:, :, 1]
@@ -66,9 +67,12 @@ def mean_coordinate_calculator(pc_addr, target):
         xmean = nonzero_mean(temp)
         coordinate_list.append([xmean,ymean,zmean])
     return coordinate_list
+
 def center_coordinate_calculator(pc_addr, target):
     pc = np.array(cv2.imread(pc_addr, cv2.IMREAD_UNCHANGED), dtype=np.int16)
-    temp = pc[:,:,0] + pc[:,:,1] + pc[:,:,2]
+    tempx = pc[:, :, 2] 
+    tempy = pc[:, :, 1] 
+    tempz = pc[:, :, 0]
     coordinate_list = []
     for tgt in target:
         xmin = int(tgt[0])
@@ -77,13 +81,16 @@ def center_coordinate_calculator(pc_addr, target):
         ymax = int(tgt[3])
         xcenter = int((xmin+xmax)/2)
         ycenter = int((ymin+ymax)/2)
-        nonzero_list = np.nonzero(temp)
-        ynonzero=(np.array(nonzero_list[0])-ycenter)**2
-        xnonzero=(np.array(nonzero_list[1])-xcenter)**2
-        dist_arr = (xnonzero+ynonzero)**0.5
-        index=np.argmin(dist_arr)
-        ty = nonzero_list[0][index]
-        tx = nonzero_list[1][index]
+        nonzero_listx = np.nonzero(tempx)
+        nonzero_listy = np.nonzero(tempy)
+        nonzero_listz = np.nonzero(tempz)
+        ynonzero = (np.array(nonzero_listy[0])-ycenter)**2
+        xnonzero = (np.array(nonzero_listx[1])-xcenter)**2
+        znonzero = (np.array(nonzero_listz[2]) ** 2
+        dist_arr = (xnonzero + ynonzero + znonzero) ** 0.5     
+        index=np.argmin(dist_arr)           
+        ty = nonzero_listy[0][index]
+        tx = nonzero_listx[1][index]
         coordinate_list.append([mytypecast(pc[ty,tx,2]),mytypecast(pc[ty,tx,1]),mytypecast(pc[ty,tx,0])])
     #print(coordinate_list)
     return coordinate_list
@@ -101,6 +108,7 @@ def transmit_coordinates(coordinates, client):
     client.write_register(address=regiaddrZ1, value=distanceZ, unit=255)
     print("Transmission success", coordinates[0])
     time.sleep(0.1)
+    
     distanceZ = coordinates[1][0] + offset
     distanceY = coordinates[1][1] + offset
     distanceX = coordinates[1][2] + offset
