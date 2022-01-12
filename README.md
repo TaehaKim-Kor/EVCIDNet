@@ -1,12 +1,14 @@
 ## EVCIDNet
 # Electric Vehicle Charge Inlet Detection Network
-Model : DetectoRS with MMDetection
+Neural Network Model : DetectoRS with MMDetection
+
+Robot : Doosan Robotics M0609
 
 Camera : Azure Kinect DK
 
 Language : C++(Kinect) , Python(DetectoRS)
 
-Communication : Pymodbus(TCP/IP Modbus)
+Communication : Pymodbus(TCP/IP Modbus) - LAN Direct Connection
 
 If you want to use this project, you should add or install these libraries.
 > OpenCV, At least 4.3.0, opencv_world4{xx}d.dll, opencv_world4{xx}d.dll should be in the ./x64/Release/
@@ -16,8 +18,8 @@ If you want to use this project, you should add or install these libraries.
 >> 
 >> We do not guarentee this system works with OpenCV's previous version.
 >
-> Pytorch Parameter Model File. [Download Link, to be announced](tobeannoucned.com)
->> Default file name : best_model.pth
+> Pytorch Parameter Model File. [Download Link](https://docs.google.com/uc?export=download&id=1xOLM4i5fJwMhgvZX6uoJ2rGcsnC9vM4C)
+>> Default file name : EVCIDNet_DetectoRS_model.pth
 
 # Main Libraries
 > Pytorch
@@ -113,7 +115,7 @@ If you want to use this project, you should add or install these libraries.
 
 
 # Command for running system
-> python infer.py AzureKinectDK/output/color.png configs/config_demo.py best_model.pth
+> python infer.py AzureKinectDK/output/color.png configs/config_demo.py EVCIDNet_DetectoRS_model.pth
 
 # Contributors for this vision system
 > Taeha Kim
