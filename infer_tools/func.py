@@ -71,8 +71,8 @@ def mean_coordinate_calculator(pc_addr, target):
 def center_coordinate_calculator(pc_addr, target):
     pc = np.array(cv2.imread(pc_addr, cv2.IMREAD_UNCHANGED), dtype=np.int16)
     tempx = pc[:, :, 2] 
-    tempy = pc[:, :, 1] 
-    tempz = pc[:, :, 0]
+    tempy = pc[:, :, 1]      
+    tempz = pc[:, :, 0]      # to find x, y, z not 0 value
     coordinate_list = []
     for tgt in target:
         xmin = int(tgt[0])
@@ -80,15 +80,15 @@ def center_coordinate_calculator(pc_addr, target):
         xmax = int(tgt[2])
         ymax = int(tgt[3])
         xcenter = int((xmin+xmax)/2)
-        ycenter = int((ymin+ymax)/2)
+        ycenter = int((ymin+ymax)/2)        
         nonzero_listx = np.nonzero(tempx)
         nonzero_listy = np.nonzero(tempy)
         nonzero_listz = np.nonzero(tempz)
-        ynonzero = (np.array(nonzero_listy[0])-ycenter)**2
-        xnonzero = (np.array(nonzero_listx[1])-xcenter)**2
-        znonzero = (np.array(nonzero_listz[2]) ** 2
-        dist_arr = (xnonzero + ynonzero + znonzero) ** 0.5     
-        index=np.argmin(dist_arr)           
+        nonzero_list = nonzero_listx + nonzero_listy + nonzero_listz
+        ynonzero = (np.array(nonzero_list[0])-ycenter)**2    # row
+        xnonzero = (np.array(nonzero_list[1])-xcenter)**2    # col
+        min_dist = (ynonzero + xnonzero) ** 0.5
+        index = np.argmin(min_dist)                           # index means pixel location
         ty = nonzero_listy[0][index]
         tx = nonzero_listx[1][index]
         coordinate_list.append([mytypecast(pc[ty,tx,2]),mytypecast(pc[ty,tx,1]),mytypecast(pc[ty,tx,0])])

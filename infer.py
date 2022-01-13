@@ -66,27 +66,27 @@ def finisher():
         pass
     
     try:
-        os.remove(point_addr)         # initializer, finisher모두 color, point지우신게 비우고 시작하시기 위함이신지 질문드리기
+        os.remove(point_addr)         
     except:
         pass
 
-def communicate_flag_activator(client, flag):       # get flag signal, response to signal and create flag
+def communicate_flag_activator(client, flag):       # check flag in file path and decision inflag
     while(True):
         #time.sleep(0.5)
         response = client.read_holding_registers(address = regiaddrC, unit = 255)
         
-        if response.registers[0] == flag1_signal and not os.path.isfile(flag[0]): # create flag1, response to flag1 signal
-            flag_activator(flag[0])
+        if response.registers[0] == flag1_signal and not os.path.isfile(flag[0]): # check register connet and check flag1 in file path
+            flag_activator(flag[0])    # make flag1 in file path
             inflag = 1      # image capture start
             break
         
-        elif response.registers[0] == flag3_signal: # create flag3, response to flag3 signal
+        elif response.registers[0] == flag3_signal: # check register connet
             flag_activator(flag[2])
             inflag = 0      # camera turn off and program terminate flag
             break
         
-        else:               # image capture finish
-            inflag = 2  # 혹시 inflag 번호와 flag번호를 다르게 주신 이유가 있으신지 질문드리기
+        else:               
+            inflag = 2  # image capture finish
     
     return inflag
     #return (inflag==1)
@@ -105,17 +105,17 @@ def vision_process_with_communication(model, client):
             time.sleep(0.1)
             
         if os.path.isfile(flag[0]):
-            flag_remover(flag[1])       # store image and initialize flag
+            flag_remover(flag[1])       
             
             if os.path.isfile(color_addr):
                 time.sleep(0.5)
-                result = inference_detector(model, args.img)
+                result = inference_detector(model, args.img)   # only in flag1 in file path and start detector
                 class_detection_list = []
                 
                 if len(result[0]) is not 3:
-                    print("The number of objects are detected is under the 3.")
+                    print("The number of objects are detected is under the 3.") # 3 means dataset class number
                 
-                for i in range(len(result[0])):
+                for i in range(len(result[0])):       # MMdetection algorithm
                     tgt_list = [0 for i in range(5)]
                     
                     if len(result[0][i]) is not 1:
@@ -134,12 +134,14 @@ def vision_process_with_communication(model, client):
                 
                 try:
                     pc_list=center_coordinate_calculator(point_addr, class_detection_list)
+                    # if point data in file path, get 3-dimension coordinate in pc_list
                 except:
                     pc_list = [[0 for i in range(3)] for i in range(3)]
-                # 여기까지하면 3차원좌표가 나옴.
-                if transmit_coordinates(pc_list, client):
-                    flag_remover(flag[0]) #이미지 캡처 시작 플래그 초기화
-                    flag_remover(flag[1]) #이미지 캡처 완료 플래그 초기화
+                    # not have point data in file path, fill zero pc_list
+                
+                if transmit_coordinates(pc_list, client):     
+                    flag_remover(flag[0]) 
+                    flag_remover(flag[1])         # remove flag1, flag2 for restarting.
                     try: os.remove(color_addr)
                     except: pass
                     try: os.remove(point_addr)
